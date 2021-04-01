@@ -8,35 +8,35 @@
 //==============================================================
 
 export enum UserRole {
-  Client = "Client",
-  Delivery = "Delivery",
-  Host = "Host",
-  Listener = "Listener",
-  Owner = "Owner",
+	Client = "Client",
+	Delivery = "Delivery",
+	Host = "Host",
+	Listener = "Listener",
+	Owner = "Owner",
 }
 
 export interface CategoryInput {
-  page?: number | null;
-  slug: string;
+	page?: number | null;
+	slug: string;
 }
 
 export interface CreateAccountInput {
-  email: string;
-  password: string;
-  role: UserRole;
+	email: string;
+	password: string;
+	role: UserRole;
 }
 
 export interface LoginInput {
-  email: string;
-  password: string;
+	email: string;
+	password: string;
 }
 
 export interface RestaurantInput {
-  restaurantId: number;
+	restaurantId: number;
 }
 
 export interface RestaurantsInput {
-  page?: number | null;
+	page?: number | null;
 }
 
 //==============================================================

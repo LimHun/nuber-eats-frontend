@@ -1,4 +1,4 @@
-import {
+ import {
 	ApolloClient,
 	createHttpLink,
 	InMemoryCache,
@@ -27,6 +27,7 @@ const authLink = setContext((_, { headers }) => {
 
 export const client = new ApolloClient({
 	link: authLink.concat(httpLink),
+ 
 	cache: new InMemoryCache({
 		typePolicies: {
 			Query: {
@@ -35,12 +36,12 @@ export const client = new ApolloClient({
 						read() {
 							return isLoggedInVar();
 						},
-					},
+					}, 
 					token: {
 						read() {
 							return authTokenVar();
 						},
-					},
+					}, 
 				},
 			},
 		},
