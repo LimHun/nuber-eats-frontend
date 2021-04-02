@@ -8,6 +8,7 @@ import playIcon from "../images/play-button.svg";
 import listIcon from "../images/list.svg";
 import downloadIcon from "../images/download.svg";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const PODCAST_QUERY = gql`
 	query allPodcasts {
@@ -37,10 +38,14 @@ export const Podcasts = () => {
 
 	return (
 		<div>
+			<Helmet>
+				<title>Podcast | list</title>
+			</Helmet>
 			<div className="bg-gray-800 w-full flex items-center justify-center mx-auto ">
 				{index === 1 ? (
 					<div className="py-3 px-4 border-b-2  border-blue-300 text-center text-blue-300">
 						<button
+							role="alert"
 							className="focus:outline-none focus:ring-0"
 							onClick={() => onTabClick(1)}
 						>

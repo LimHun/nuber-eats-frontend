@@ -21,3 +21,14 @@ export const CATEGORY_FRAGMENT = gql`
 		restaurantCount
 	}
 `;
+
+export const PODCAST_FRAGMENT = gql`
+	fragment PodcastParts on Podcast {
+		id
+		title
+		category
+		thumbnailUrl
+		description
+		rating
+	}
+`;

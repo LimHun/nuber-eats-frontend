@@ -10,6 +10,7 @@ import playIcon from "../images/play-button.svg";
 import listIcon from "../images/list.svg";
 import downloadIcon from "../images/download.svg";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const PODCAST_QUERY = gql`
 	query getAllPodcasts {
@@ -35,6 +36,9 @@ export const PodcastDetail = () => {
 
 	return (
 		<div className="w-full justify-center items-center bg-gray-800">
+			<Helmet>
+				<title>Podcast | detail</title>
+			</Helmet>
 			<div className="w-full flex justify-between ">
 				<Link className="p-3" to="/podcasts">
 					<img src={backIcon} className=" ml-3 mt w-6" alt="" />

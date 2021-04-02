@@ -2,8 +2,19 @@ import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
-import { RESTAURANT_FRAGMENT } from "../fragments";
 import { restaurant, restaurantVariables } from "../__generated__/restaurant";
+
+const RESTAURANT_FRAGMENT = gql`
+	fragment RestaurantParts on Restaurant {
+		id
+		name
+		coverImg
+		category {
+			name
+		}
+		address
+	}
+`;
 
 const RESTAURANT_QUERY = gql`
 	query restaurant($input: RestaurantInput!) {
