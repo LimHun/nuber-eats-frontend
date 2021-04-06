@@ -1,4 +1,4 @@
- import {
+import {
 	ApolloClient,
 	createHttpLink,
 	InMemoryCache,
@@ -13,7 +13,10 @@ export const isLoggedInVar = makeVar(Boolean(token));
 export const authTokenVar = makeVar(token);
 
 const httpLink = createHttpLink({
-	uri: "http://localhost:4000/graphql",
+	uri:
+		process.env.NODE_ENV === "production"
+			? "https://nuber-eats-backend-tunko.herokuapp.com/graphql"
+			: "http://localhost:4000/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -27,7 +30,7 @@ const authLink = setContext((_, { headers }) => {
 
 export const client = new ApolloClient({
 	link: authLink.concat(httpLink),
- 
+
 	cache: new InMemoryCache({
 		typePolicies: {
 			Query: {
@@ -36,12 +39,12 @@ export const client = new ApolloClient({
 						read() {
 							return isLoggedInVar();
 						},
-					}, 
+					},
 					token: {
 						read() {
 							return authTokenVar();
 						},
-					}, 
+					},
 				},
 			},
 		},
