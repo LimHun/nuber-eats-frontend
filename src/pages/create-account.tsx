@@ -8,6 +8,7 @@ import {
 	loginMutationVariables,
 } from "../__generated__/loginMutation";
 import nuberLogo from "../images/logo.svg";
+import podcastLogo from "../images/podcasts.svg";
 import { Button } from "../components/button";
 import { Link, useHistory } from "react-router-dom";
 import { UserRole } from "../__generated__/globalTypes";
@@ -41,7 +42,7 @@ export const CreateAccount = () => {
 	} = useForm<ICreateAccountForm>({
 		mode: "onChange",
 		defaultValues: {
-			role: UserRole.Client,
+			role: UserRole.Host,
 		},
 	});
 	const history = useHistory();
@@ -75,76 +76,159 @@ export const CreateAccount = () => {
 	};
 
 	return (
-		<div className="h-screen flex items-center flex-col mt-10 lg:mt-28">
-			<Helmet>
-				<title>Create Account | Nuber Eats</title>
-			</Helmet>
-			<div className="w-full max-w-screen-sm flex flex-col px-5 items-center">
-				<img src={nuberLogo} className="w-52 mb-10" alt="Nuber Eats" />
-				<h4 className="w-full font-medium text-left text-3xl mb-5">
-					Let's get started
-				</h4>
-				<form
-					onSubmit={handleSubmit(onSubmit)}
-					className="grid gap-3 mt-5 w-full mb-5"
-				>
-					<input
-						ref={register({
-							required: "Email is required",
-							pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-						})}
-						name="email"
-						required
-						type="email"
-						placeholder="Email"
-						className="input"
+		// <div className="h-screen flex items-center flex-col mt-10 lg:mt-28">
+		// 	<Helmet>
+		// 		<title>Create Account | Nuber Eats</title>
+		// 	</Helmet>
+		// 	<div className="w-full max-w-screen-sm flex flex-col px-5 items-center">
+		// 		<img src={nuberLogo} className="w-52 mb-10" alt="Nuber Eats" />
+		// 		<h4 className="w-full font-medium text-left text-3xl mb-5">
+		// 			Let's get started
+		// 		</h4>
+		// 		<form
+		// 			onSubmit={handleSubmit(onSubmit)}
+		// 			className="grid gap-3 mt-5 w-full mb-5"
+		// 		>
+		// 			<input
+		// 				ref={register({
+		// 					required: "Email is required",
+		// 					pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+		// 				})}
+		// 				name="email"
+		// 				required
+		// 				type="email"
+		// 				placeholder="Email"
+		// 				className="input"
+		// 			/>
+		// 			{errors.email?.message && (
+		// 				<FormError errorMessage={errors.email?.message} />
+		// 			)}
+		// 			{errors.email?.type === "pattern" && (
+		// 				<FormError
+		// 					errorMessage={"Please enter a valid email"}
+		// 				/>
+		// 			)}
+		// 			<input
+		// 				ref={register({ required: "Password is required" })}
+		// 				required
+		// 				name="password"
+		// 				type="password"
+		// 				placeholder="Password"
+		// 				className="input"
+		// 			/>
+		// 			{errors.password?.message && (
+		// 				<FormError errorMessage={errors.password?.message} />
+		// 			)}
+		// 			<select
+		// 				name="role"
+		// 				ref={register({ required: true })}
+		// 				className="input"
+		// 			>
+		// 				{Object.keys(UserRole).map((role, index) => (
+		// 					<option key={index}>{role}</option>
+		// 				))}
+		// 			</select>
+		// 			<Button
+		// 				canClick={formState.isValid}
+		// 				loading={loading}
+		// 				actionText={"Create Account"}
+		// 			/>
+		// 			{createAccountMutationResult?.createAccount.error && (
+		// 				<FormError
+		// 					errorMessage={
+		// 						createAccountMutationResult.createAccount.error
+		// 					}
+		// 				/>
+		// 			)}
+		// 		</form>
+		// 		<div>
+		// 			Already have an account?{" "}
+		// 			<Link to="/" className="text-lime-600 hover:underline">
+		// 				Log in now
+		// 			</Link>
+		// 		</div>
+		// 	</div>
+		// </div>
+		<div className="bg-gradient-to-b from-purple-500 to-pink-300">
+			<div className="h-screen flex flex-col justify-center items-center">
+				<Helmet>
+					<title>Create Account | Podcast</title>
+				</Helmet>
+				<div className="w-full max-w-screen-sm flex flex-col px-5 items-center">
+					<img
+						src={podcastLogo}
+						className="w-52 mb-10"
+						alt="Nuber Eats"
 					/>
-					{errors.email?.message && (
-						<FormError errorMessage={errors.email?.message} />
-					)}
-					{errors.email?.type === "pattern" && (
-						<FormError
-							errorMessage={"Please enter a valid email"}
-						/>
-					)}
-					<input
-						ref={register({ required: "Password is required" })}
-						required
-						name="password"
-						type="password"
-						placeholder="Password"
-						className="input"
-					/>
-					{errors.password?.message && (
-						<FormError errorMessage={errors.password?.message} />
-					)}
-					<select
-						name="role"
-						ref={register({ required: true })}
-						className="input"
+
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="grid gap-3 w-full max-w-xs"
 					>
-						{Object.keys(UserRole).map((role, index) => (
-							<option key={index}>{role}</option>
-						))}
-					</select>
-					<Button
-						canClick={formState.isValid}
-						loading={loading}
-						actionText={"Create Account"}
-					/>
-					{createAccountMutationResult?.createAccount.error && (
-						<FormError
-							errorMessage={
-								createAccountMutationResult.createAccount.error
-							}
+						<h4 className="w-full font-medium text-left text-3xl mb-5">
+							Let's get started
+						</h4>
+						<input
+							className="input shadow-xl text-white placeholder-gray-500 bg-black rounded-lg border-gray-700 border focus:outline-none px-5 py-3 focus:border-white transition-colors duration-500"
+							ref={register({
+								required: "Email is required",
+								pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+							})}
+							name="email"
+							required
+							type="email"
+							placeholder="Email"
 						/>
-					)}
-				</form>
-				<div>
-					Already have an account?{" "}
-					<Link to="/" className="text-lime-600 hover:underline">
-						Log in now
-					</Link>
+						{errors.email?.message && (
+							<FormError errorMessage={errors.email?.message} />
+						)}
+						{errors.email?.type === "pattern" && (
+							<FormError
+								errorMessage={"Please enter a valid email"}
+							/>
+						)}
+						<input
+							className="input shadow-xl text-white placeholder-gray-500 bg-black rounded-lg border-gray-700 border focus:outline-none px-5 py-3 focus:border-white transition-colors duration-500"
+							ref={register({ required: "Password is required" })}
+							required
+							name="password"
+							type="password"
+							placeholder="Password"
+						/>
+						{errors.password?.message && (
+							<FormError
+								errorMessage={errors.password?.message}
+							/>
+						)}
+						<select
+							className="shadow-xl text-white placeholder-gray-500 bg-black rounded-lg border-gray-700 border focus:outline-none px-5 py-3 focus:border-white transition-colors duration-500"
+							name="role"
+							ref={register({ required: true })}
+						>
+							{Object.keys(UserRole).map((role, index) => (
+								<option key={index}>{role}</option>
+							))}
+						</select>
+						<Button
+							canClick={formState.isValid}
+							loading={loading}
+							actionText={"Create Account"}
+						/>
+						{createAccountMutationResult?.createAccount.error && (
+							<FormError
+								errorMessage={
+									createAccountMutationResult.createAccount
+										.error
+								}
+							/>
+						)}
+					</form>
+					<div className="mt-3">
+						Already have an account?{" "}
+						<Link to="/" className="text-blue-600 hover:underline">
+							Log in now
+						</Link>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -12,10 +12,10 @@ export const Button: React.FC<IButtonProps> = ({
 	actionText,
 }) => (
 	<button
-		className={`text-lg font-medium focus:outline-none text-white py-4 transition-colors ${
+		className={` mt-3 text-lg font-medium focus:outline-none text-white py-3 transition-colors rounded-lg ${
 			canClick
 				? "bg-lime-400 hover:bg-lime-500"
-				: "bg-gray-300 pointer-events-none"
+				: "bg-purple-300 pointer-events-none"
 		}`}
 	>
 		{loading ? "Loading..." : actionText}

@@ -1,14 +1,16 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
-import React from "react";
+import React, { useState } from "react";
 import {
 	BrowserRouter as Router,
+	Link,
 	Redirect,
 	Route,
 	Switch,
 } from "react-router-dom";
 import { Header } from "../components/header";
 import { Restaurant } from "../components/restaurant";
+import { LOCALSTORAGE_TOKEN } from "../constants";
 import { useMe } from "../hooks/useMe";
 import { NotFound } from "../pages/404";
 import { Category } from "../pages/client/category";
@@ -18,7 +20,8 @@ import { PodcastDetail } from "../pages/podcastDetail";
 
 const ClientRoutes = [
 	<Route key={1} path="/" exact>
-		<Restaurants />
+		{/* <Restaurants /> */}
+		<Podcasts />
 	</Route>,
 	// <Route key={2} path="/confirm">
 	// 	<ConfirmEmail />
@@ -44,6 +47,11 @@ const ClientRoutes = [
 ];
 
 export const LoggedInRouter = () => {
+	function goHome() {
+		localStorage.setItem(LOCALSTORAGE_TOKEN, "false");
+		console.log("go Home");
+	}
+
 	const { data, loading, error } = useMe();
 	if (!data || loading || error) {
 		return (
@@ -51,6 +59,21 @@ export const LoggedInRouter = () => {
 				<span className=" font-medium text-xl tracking-wide">
 					Loading...
 				</span>
+				<button
+					onClick={goHome}
+					className="font-medium text-xl tracking-wide text-blue-600"
+				>
+					go to Home
+				</button>
+				{/* <Router>
+					<Route>
+						<Link to="/">
+							<span className="font-medium text-xl tracking-wide text-blue-600">
+								go to Home
+							</span>
+						</Link>
+					</Route>
+				</Router> */}
 			</div>
 		);
 	}
